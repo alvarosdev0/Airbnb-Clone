@@ -30,12 +30,6 @@ interface SeedProperty {
   hostIndex: number; // index into hosts array
 }
 
-interface SeedReview {
-  rating: number;
-  comment: string;
-  userIndex: number; // index into hosts (reviews are from other hosts)
-}
-
 const hosts: SeedHost[] = [
   {
     name: "Sophie Laurent",
