@@ -7,8 +7,7 @@ import HostCard from "@/components/properties/HostCard";
 import AmenitiesGrid from "@/components/properties/AmenitiesGrid";
 import ReviewList from "@/components/reviews/ReviewList";
 import Skeleton from "@/components/ui/Skeleton";
-import { isDbAvailable, getMockPropertyById } from "@/lib/mock-data";
-import type { PropertyWithDetails } from "@/types";
+import { getPropertyById } from "@/lib/data-service";
 
 interface PropertyDetailPageProps {
   params: Promise<{ id: string }>;
@@ -17,38 +16,13 @@ interface PropertyDetailPageProps {
 /**
  * Server Page: /properties/[id]
  * Fetches a single property with host + reviews, or returns 404.
- * Falls back to mock data when PostgreSQL is unavailable.
+ * Uses the data service layer (currently mock data, swappable to any API).
  */
 export default async function PropertyDetailPage({
   params,
 }: PropertyDetailPageProps) {
   const { id } = await params;
-  let property: PropertyWithDetails | null = null;
-
-  try {
-    if (await isDbAvailable()) {
-      const { prisma } = await import("@/lib/prisma");
-
-      property = await prisma.property.findUnique({
-        where: { id },
-        include: {
-          host: {
-            select: { id: true, name: true, image: true, bio: true },
-          },
-          reviews: {
-            include: {
-              user: { select: { id: true, name: true, image: true } },
-            },
-            orderBy: { createdAt: "desc" },
-          },
-        },
-      });
-    } else {
-      property = getMockPropertyById(id) ?? null;
-    }
-  } catch {
-    property = getMockPropertyById(id) ?? null;
-  }
+  const property = await getPropertyById(id);
 
   if (!property) {
     notFound();
