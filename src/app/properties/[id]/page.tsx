@@ -87,7 +87,7 @@ export default async function PropertyDetailPage({
                 {property.reviews.length > 0
                   ? (
                       property.reviews.reduce(
-                        (sum, r) => sum + r.rating,
+                        (sum: number, r: { rating: number }) => sum + r.rating,
                         0,
                       ) / property.reviews.length
                     ).toFixed(1)

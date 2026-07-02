@@ -7,16 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:push": "npx prisma db push",
-    "db:seed": "npx prisma db seed",
-    "postinstall": "npx prisma generate"
-  },
-  "prisma": {
-    "seed": "npx tsx prisma/seed.ts"
+    "db:push": "echo 'Database removed — use data-service.ts instead'",
+    "db:seed": "echo 'Database removed — use data-service.ts instead'"
   },
   "dependencies": {
     "@heroicons/react": "2.2.0",
-    "@prisma/client": "^6.6.0",
     "clsx": "^2.1.1",
     "leaflet": "^1.9.4",
     "next": "16.2.9",
@@ -32,7 +27,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
-    "prisma": "^6.6.0",
     "tailwindcss": "^4",
     "tsx": "^4.19.0",
     "typescript": "^5"

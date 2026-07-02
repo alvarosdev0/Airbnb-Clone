@@ -1,51 +1,55 @@
-import type { Prisma } from "@prisma/client";
+// ---------------------------------------------------------------------------
+// Domain types — standalone, no Prisma dependency.
+// The shape mirrors what the data service returns (currently mock data,
+// swappable to any API in the future).
+// ---------------------------------------------------------------------------
 
-// Re-usable includes for property queries
-export const propertyWithHostInclude = {
-  host: {
-    select: {
-      id: true,
-      name: true,
-      image: true,
-    },
-  },
-} satisfies Prisma.PropertyInclude;
+export interface Host {
+  id: string;
+  name: string;
+  image: string | null;
+  bio?: string | null;
+}
 
-export const propertyWithDetailsInclude = {
-  host: {
-    select: {
-      id: true,
-      name: true,
-      image: true,
-      bio: true,
-    },
-  },
-  reviews: {
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          image: true,
-        },
-      },
-    },
-    orderBy: {
-      createdAt: "desc" as const,
-    },
-  },
-} satisfies Prisma.PropertyInclude;
+export interface Review {
+  id: string;
+  rating: number;
+  comment: string;
+  userId: string;
+  user: Pick<Host, "id" | "name" | "image">;
+  propertyId: string;
+  createdAt: Date;
+}
 
-// Inferred types from Prisma
-export type PropertyWithHost = Prisma.PropertyGetPayload<{
-  include: typeof propertyWithHostInclude;
-}>;
+export interface Property {
+  id: string;
+  title: string;
+  description: string;
+  pricePerNight: number;
+  bedrooms: number;
+  bathrooms: number;
+  maxGuests: number;
+  address: string;
+  city: string;
+  country: string;
+  lat: number;
+  lng: number;
+  category: string;
+  amenities: string[];
+  images: string[];
+  hostId: string;
+}
 
-export type PropertyWithDetails = Prisma.PropertyGetPayload<{
-  include: typeof propertyWithDetailsInclude;
-}>;
+export interface PropertyWithDetails extends Property {
+  host: Host;
+  reviews: Review[];
+  createdAt: Date;
+}
 
-// Domain types
+// ---------------------------------------------------------------------------
+// Domain enums & constants
+// ---------------------------------------------------------------------------
+
 export type Category =
   | "Beach"
   | "Mountain"
@@ -67,7 +71,7 @@ export const CATEGORIES: Category[] = [
   "Tropical",
 ];
 
-// Category icons — legacy alias kept for backward compat; use CategoryIcon component instead
+// Legacy alias kept for backward compat; use CategoryIcon component instead
 export const CATEGORY_ICONS: Record<Category, string> = {} as Record<Category, string>;
 
 export interface SearchFilters {

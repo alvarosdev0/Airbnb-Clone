@@ -1,27 +1,8 @@
 import type { PropertyWithDetails } from "@/types";
 
 /**
- * Check if the database is available by trying to connect to Prisma.
- * Falls back to mock data when PostgreSQL is not running.
- */
-let _dbAvailable: boolean | null = null;
-
-export async function isDbAvailable(): Promise<boolean> {
-  if (_dbAvailable !== null) return _dbAvailable;
-  try {
-    const { prisma } = await import("@/lib/prisma");
-    await prisma.$queryRaw`SELECT 1`;
-    _dbAvailable = true;
-  } catch {
-    _dbAvailable = false;
-  }
-  return _dbAvailable;
-}
-
-/**
- * Seed-matching mock data: 25 properties across 8 categories.
- * Mirrors the exact structure of prisma/seed.ts so the app works
- * without a running PostgreSQL instance.
+ * Standalone mock data: 25 properties across 8 categories.
+ * Used by the data service layer until a real API is integrated.
  */
 const hostUsers = [
   {

@@ -37,10 +37,6 @@ export default function CategoryBar() {
 
   return (
     <div className="relative">
-      {/* Gradient fade on edges for scroll hint */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-bg to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-bg to-transparent" />
-
       <div className="scrollbar-hide -mx-4 overflow-x-auto px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div className="flex gap-6 py-3">
           {CATEGORIES.map((category: Category) => {
