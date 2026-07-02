@@ -1,67 +1,90 @@
 @import "tailwindcss";
 
-/* ═════════════════════════════════════════════════
-   Design System: Nature Distilled + Soft UI Evolution
-   Basado en: UI-UX-Pro-Max Skill v2.10 (nextlevelbuilder)
-   ────────────────────────────────────────────────
-   Estilo: Nature Distilled (colores tierra acogedores)
-   + Soft UI Evolution (contraste WCAG AA+, sombras suaves)
-   Tono: Cálido, acogedor, hospitalario
-   ═════════════════════════════════════════════════
-   WCAG AA verificados (cálculos incluidos):
-   - Texto normal (≥4.5:1) ✅
-   - Texto grande / iconos / UI (≥3:1) ✅
-   - Dark mode verificado independientemente ✅
-   ═════════════════════════════════════════════════ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ═══════════════════════════════════════════════════════
+   Design System: Coral Modern + Soft UI Evolution v2
+   Basado en: UI-UX-Pro-Max Skill v2 (nextlevelbuilder)
+   ───────────────────────────────────────────────────────
+   Estilo: Soft UI Evolution (skill-recommended)
+   ─── WCAG AA+ verificados (Jul 2026) ───
+   - Texto primary (#111111) sobre blanco:  18.88:1 ✅ AAA
+   - Texto secondary (#444444) sobre blanco: 9.74:1 ✅ AAA
+   - Gray-soft (#666666) sobre blanco:       5.74:1 ✅ AA
+   - Primary (#D04444) sobre blanco:         4.57:1 ✅ AA
+   - Blanco sobre primary (#D04444):         4.57:1 ✅ AA
+   - Dark mode verificado independentemente
+   ═══════════════════════════════════════════════════════ */
 
 @theme inline {
-  /* ── Nature Distilled: Terracotta, arcilla, crema ── */
-  --color-primary: #B86045;        /* Terracota - botones/links | 4.75:1 sobre blanco ✅ */
-  --color-primary-dark: #95432C;   /* Terracota oscura - hover | 5.44:1 ✅ */
-  --color-secondary: #D4A373;      /* Arena dorada - secondary */
-  --color-accent: #B87D3E;         /* Oro cálido - estrellas/badges | 3.46:1 iconos ✅ */
-  --color-background: #FBF6F0;     /* Crema suave - fondo de página */
-  --color-foreground: #2C2420;     /* Marrón oscuro - headings */
-  --color-muted: #F0E8DE;          /* Beige claro - fondos secundarios */
-  --color-border: #DDCFC3;         /* Beige cálido - bordes */
-  --color-destructive: #C44A3C;    /* Rojo cálido - destructivo */
-  --color-ring: #B86045;           /* Anillo de foco */
-  --color-bg: #FFFFFF;             /* Blanco - fondo de cards */
-  --color-card: #FFFFFF;           /* Fondo de tarjetas */
-  --color-text-primary: #2C2420;   /* Marrón oscuro - texto cuerpo | 12:1+ ✅ */
-  --color-text-secondary: #6B5A4C; /* Marrón medio - texto secundario | 4.83:1 ✅ */
-  --color-gray-soft: #665548;      /* Gris cálido - texto sutil | 5.42:1 ✅ */
-  --color-gray-light: #E6D9CD;     /* Beige claro - bordes suaves */
+  /* ── Coral Modern ──
+       WCAG AA+ verificados (Jul 2026):
+       - #D04444 sobre blanco:   4.57:1 ✅ AA
+       - Blanco sobre #D04444:   4.57:1 ✅ AA (botones)
+       - #B53A3A sobre blanco:   5.78:1 ✅ AA
+       - #444444 sobre blanco:   9.74:1 ✅ AAA
+       - #666666 sobre blanco:   5.74:1 ✅ AA
+       - Dark mode verificado independientemente
+  */
+  --color-primary: #D04444;
+  --color-primary-dark: #B53A3A;
+  --color-primary-light: #FEF2F2;
+  --color-secondary: #6B7280;
+  --color-accent: #D04444;
+  --color-background: #FFFFFF;
+  --color-foreground: #111111;
+  --color-bg: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-muted: #F7F7F7;
+  --color-border: #E5E5E5;
+  --color-destructive: #DC2626;
+  --color-ring: #D04444;
+  --color-text-primary: #111111;
+  --color-text-secondary: #444444;
+  --color-gray-soft: #666666;
+  --color-gray-light: #E5E5E5;
 
   /* ── Soft UI Evolution: sombras suaves multicapa ── */
-  --shadow-soft-sm: 0 1px 3px rgba(44, 36, 32, 0.06);
-  --shadow-soft-md: 0 4px 12px rgba(44, 36, 32, 0.08);
-  --shadow-soft-lg: 0 8px 24px rgba(44, 36, 32, 0.10);
+  --shadow-soft-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-soft-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-soft-lg: 0 8px 24px rgba(0, 0, 0, 0.10);
 
   --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
 }
 
-/* ── Dark Mode: cálido-oscuro ── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #E8A088;        /* Terracota claro - 4.83:1 sobre fondo oscuro ✅ */
-    --color-primary-dark: #D4836A;   /* Hover */
-    --color-secondary: #C99B7A;      /* Arena oscura */
-    --color-accent: #E8C06A;         /* Oro claro - 6.25:1 ✅ */
-    --color-background: #1A1512;     /* Marrón muy oscuro */
-    --color-foreground: #F5F0EC;     /* Blanco cálido */
-    --color-muted: #302822;          /* Marrón oscuro medio */
-    --color-border: #4A3F37;         /* Borde oscuro */
-    --color-destructive: #E86A5A;    /* Rojo cálido claro */
-    --color-ring: #E8A088;           /* Anillo de foco */
-    --color-bg: #2C2420;             /* Fondo principal oscuro */
-    --color-card: #352C25;           /* Card oscuro */
-    --color-text-primary: #F5F0EC;   /* Texto claro - 12:1 ✅ */
-    --color-text-secondary: #C4B5A5; /* Texto secundario - 8:1 ✅ */
-    --color-gray-soft: #A89480;      /* Gris cálido oscuro - 5.8:1 ✅ */
-    --color-gray-light: #3A3028;     /* Borde oscuro */
-  }
+/* ── Dark Mode: fondo oscuro, coral claro ──
+     WCAG AA+ verificados (Jul 2026):
+     - #F06A6A sobre #2D2D2D (card):   4.57:1 ✅ AA (arreglado)
+     - #F06A6A sobre #1A1A1A (bg):     6.29:1 ✅ AA
+     - #F0F0F0 sobre #1A1A1A:         15.27:1 ✅ AAA
+     - #BBBBBB sobre #1A1A1A:          9.07:1 ✅ AAA
+     - #999999 sobre #1A1A1A:          6.11:1 ✅ AA
+*/
+:root.dark {
+  --color-primary: #F06A6A;
+  --color-primary-dark: #D04444;
+  --color-primary-light: #2D1A1A;
+  --color-secondary: #9CA3AF;
+  --color-accent: #F06A6A;
+  --color-background: #1A1A1A;
+  --color-foreground: #F0F0F0;
+  --color-bg: #1A1A1A;
+  --color-card: #2D2D2D;
+  --color-muted: #252525;
+  --color-border: #404040;
+  --color-destructive: #F87171;
+  --color-ring: #F06A6A;
+  --color-text-primary: #F0F0F0;
+  --color-text-secondary: #BBBBBB;
+  --color-gray-soft: #999999;
+  --color-gray-light: #404040;
+
+  --shadow-soft-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-soft-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-soft-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  color-scheme: dark;
 }
 
 /* ── Base ── */
@@ -72,12 +95,12 @@ body {
   transition: background-color 200ms ease, color 200ms ease;
 }
 
-/* ── Smooth transitions for all interactive elements ── */
+/* ── Smooth transitions for all interactive elements (Soft UI Evolution) ── */
 a, button, input, textarea, select {
   transition: all 200ms ease;
 }
 
-/* ── Visible focus states (keyboard nav) ── */
+/* ── Visible focus states (skill UX rule — severity: HIGH) ── */
 *:focus-visible {
   outline: 2px solid var(--color-ring);
   outline-offset: 2px;

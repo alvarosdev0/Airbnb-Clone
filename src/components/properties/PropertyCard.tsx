@@ -36,8 +36,8 @@ export default function PropertyCard({ property }: PropertyCardProps) {
 
       {/* Card info */}
       <div className="p-3">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="line-clamp-1 text-sm font-semibold text-text-primary">
+        <div className="flex items-start justify-between gap-2 min-w-0">
+          <h3 className="line-clamp-1 text-sm font-semibold text-text-primary min-w-0">
             {property.title}
           </h3>
           {rating > 0 && (

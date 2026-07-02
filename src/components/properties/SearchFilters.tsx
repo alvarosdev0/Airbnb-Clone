@@ -55,6 +55,7 @@ export default function SearchFilters() {
             value={city}
             onChange={(e) => updateParam("city", e.target.value)}
             placeholder="Any city"
+            autoComplete="city"
             className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
           />
         </div>
@@ -71,7 +72,8 @@ export default function SearchFilters() {
               onChange={(e) => updateParam("minPrice", e.target.value)}
               placeholder="Min"
               min={0}
-className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
+              autoComplete="transaction-amount"
+ className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
                aria-label="Minimum price"
             />
             <span className="text-gray-soft">—</span>
@@ -81,7 +83,8 @@ className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm te
               onChange={(e) => updateParam("maxPrice", e.target.value)}
               placeholder="Max"
               min={0}
-className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
+              autoComplete="transaction-amount"
+ className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
                aria-label="Maximum price"
             />
           </div>

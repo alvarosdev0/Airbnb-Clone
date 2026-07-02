@@ -145,6 +145,7 @@ export default function SearchBar() {
           className="flex-1 border-0 bg-transparent px-3 py-3 text-sm text-text-primary outline-none placeholder:text-gray-soft"
           aria-label="Search destinations"
           autoComplete="off"
+          inputMode="search"
           role="combobox"
           aria-expanded={showSuggestions}
           aria-controls="search-suggestions"

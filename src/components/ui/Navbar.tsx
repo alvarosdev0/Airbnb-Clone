@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   return (
@@ -42,8 +43,10 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile menu placeholder */}
-        <button
+        {/* Theme Toggle + Mobile menu */}
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          <button
           type="button"
           className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-gray-light p-2 text-sm transition-colors duration-200 hover:border-primary focus-visible:ring-2 focus-visible:ring-primary sm:hidden"
           aria-label="Menu"
@@ -63,6 +66,7 @@ export default function Navbar() {
             />
           </svg>
         </button>
+        </div>
       </div>
     </nav>
   );

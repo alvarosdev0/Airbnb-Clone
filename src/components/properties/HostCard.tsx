@@ -32,7 +32,7 @@ export default function HostCard({ host }: HostCardProps) {
             <h3 className="text-base font-semibold text-text-primary">
               Hosted by {host.name}
             </h3>
-            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+            <span className="rounded-full bg-primary-dark/10 px-2 py-0.5 text-xs font-medium text-primary-dark dark:bg-primary/10 dark:text-primary">
               Host
             </span>
           </div>
