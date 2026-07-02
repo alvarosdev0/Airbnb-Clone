@@ -89,7 +89,7 @@ export default function ReviewList({ reviews }: ReviewListProps) {
                       className={`h-3.5 w-3.5 ${
                         star <= review.rating
                           ? "text-accent"
-                          : "text-gray-light"
+                          : "text-gray-light dark:text-gray-soft/80"
                       }`}
                       fill="currentColor"
                       viewBox="0 0 24 24"

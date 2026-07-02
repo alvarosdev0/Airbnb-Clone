@@ -16,7 +16,7 @@
    - Dark mode verificado independentemente
    ═══════════════════════════════════════════════════════ */
 
-@theme inline {
+@theme {
   /* ── Coral Modern ──
        WCAG AA+ verificados (Jul 2026):
        - #D04444 sobre blanco:   4.57:1 ✅ AA

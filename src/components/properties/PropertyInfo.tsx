@@ -34,13 +34,13 @@ export default function PropertyInfo({ property }: PropertyInfoProps) {
         )}
         {property.bedrooms > 0 && (
           <>
-            <span className="text-gray-light">·</span>
+            <span className="text-gray-soft">·</span>
             <span>{property.bedrooms} {property.bedrooms === 1 ? "bedroom" : "bedrooms"}</span>
           </>
         )}
         {property.bathrooms > 0 && (
           <>
-            <span className="text-gray-light">·</span>
+            <span className="text-gray-soft">·</span>
             <span>{property.bathrooms} {property.bathrooms === 1 ? "bathroom" : "bathrooms"}</span>
           </>
         )}

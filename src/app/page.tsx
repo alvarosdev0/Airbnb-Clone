@@ -5,7 +5,7 @@ import CategoryBar from "@/components/category/CategoryBar";
 import PropertyMapWrapper from "@/components/map/PropertyMapWrapper";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
-import { isDbAvailable, getMockProperties, filterMockProperties } from "@/lib/mock-data";
+import { getProperties } from "@/lib/data-service";
 
 interface HomePageProps {
   searchParams: Promise<{
@@ -17,50 +17,11 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const params = await searchParams;
   const category = params.category;
 
-  let properties;
+  const properties = await getProperties(
+    category ? { category } : undefined,
+  );
 
-  try {
-    if (await isDbAvailable()) {
-      const { prisma } = await import("@/lib/prisma");
-
-      const where: Record<string, unknown> = {};
-      if (category) {
-        const validCategories = [
-          "Beach", "Mountain", "City", "Countryside",
-          "Modern", "Lake", "Cabin", "Tropical",
-        ];
-        if (validCategories.includes(category)) {
-          where.category = category;
-        }
-      }
-
-      properties = await prisma.property.findMany({
-        where: Object.keys(where).length > 0 ? where : undefined,
-        include: {
-          host: {
-            select: { id: true, name: true, image: true, bio: true },
-          },
-          reviews: {
-            include: {
-              user: { select: { id: true, name: true, image: true } },
-            },
-            orderBy: { createdAt: "desc" },
-          },
-        },
-      });
-    } else {
-      properties = category
-        ? filterMockProperties({ category })
-        : getMockProperties();
-    }
-  } catch {
-    properties = category
-      ? filterMockProperties({ category })
-      : getMockProperties();
-  }
-
-  const allProperties = getMockProperties();
-  const totalCount = allProperties.length;
+  const totalCount = (await getProperties()).length;
 
   return (
     <div>

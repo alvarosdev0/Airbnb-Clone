@@ -4,7 +4,7 @@ import PropertyGrid from "@/components/properties/PropertyGrid";
 import SearchFilters from "@/components/properties/SearchFilters";
 import CategoryBar from "@/components/category/CategoryBar";
 import Skeleton from "@/components/ui/Skeleton";
-import { isDbAvailable, filterMockProperties } from "@/lib/mock-data";
+import { getProperties } from "@/lib/data-service";
 
 interface PropertiesPageProps {
   searchParams: Promise<{
@@ -17,8 +17,8 @@ interface PropertiesPageProps {
 
 /**
  * Server Page: /properties
- * Reads searchParams from the URL, builds a Prisma `where` clause
- * (or falls back to mock data), and renders filtered results.
+ * Reads searchParams from the URL, fetches data via the data service,
+ * and renders filtered results.
  */
 export default async function PropertiesPage({
   searchParams,
@@ -29,68 +29,12 @@ export default async function PropertiesPage({
   const minPrice = params.minPrice ? Number(params.minPrice) : undefined;
   const maxPrice = params.maxPrice ? Number(params.maxPrice) : undefined;
 
-  let properties;
-
-  try {
-    if (await isDbAvailable()) {
-      const { prisma } = await import("@/lib/prisma");
-
-      // Build Prisma where clause dynamically
-      const where: Record<string, unknown> = {};
-
-      if (category) {
-        const validCategories = [
-          "Beach", "Mountain", "City", "Countryside",
-          "Modern", "Lake", "Cabin", "Tropical",
-        ];
-        if (validCategories.includes(category)) {
-          where.category = category;
-        }
-        // Invalid category → no filter (show all)
-      }
-
-      if (city) {
-        where.city = { contains: city, mode: "insensitive" };
-      }
-
-      if (minPrice !== undefined || maxPrice !== undefined) {
-        const priceFilter: Record<string, number> = {};
-        if (minPrice !== undefined) priceFilter.gte = minPrice;
-        if (maxPrice !== undefined) priceFilter.lte = maxPrice;
-        where.pricePerNight = priceFilter;
-      }
-
-      properties = await prisma.property.findMany({
-        where,
-        include: {
-          host: {
-            select: { id: true, name: true, image: true, bio: true },
-          },
-          reviews: {
-            include: {
-              user: { select: { id: true, name: true, image: true } },
-            },
-            orderBy: { createdAt: "desc" },
-          },
-        },
-      });
-    } else {
-      properties = filterMockProperties({
-        category,
-        city: city ?? undefined,
-        minPrice,
-        maxPrice,
-      });
-    }
-  } catch {
-    // Fallback on any DB error
-    properties = filterMockProperties({
-      category,
-      city: city ?? undefined,
-      minPrice,
-      maxPrice,
-    });
-  }
+  const properties = await getProperties({
+    category,
+    city,
+    minPrice,
+    maxPrice,
+  });
 
   const hasActiveFilters = !!(category || city || minPrice !== undefined || maxPrice !== undefined);
 
