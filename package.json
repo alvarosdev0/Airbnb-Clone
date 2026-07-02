@@ -15,10 +15,11 @@
     "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@heroicons/react": "2.2.0",
+    "@prisma/client": "^6.6.0",
     "clsx": "^2.1.1",
     "leaflet": "^1.9.4",
     "next": "16.2.9",
-    "@prisma/client": "^6.6.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-leaflet": "^5.0.0"

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import PropertyImage from "@/components/ui/PropertyImage";
 import type { PropertyWithDetails } from "@/types";
 
 interface HostCardProps {
@@ -16,7 +16,7 @@ export default function HostCard({ host }: HostCardProps) {
         {/* Avatar */}
         <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-gray-light">
           {host.image && (
-            <Image
+            <PropertyImage
               src={host.image}
               alt={host.name}
               fill
@@ -29,7 +29,7 @@ export default function HostCard({ host }: HostCardProps) {
         {/* Name and badge */}
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-base font-semibold text-secondary">
+            <h3 className="text-base font-semibold text-text-primary">
               Hosted by {host.name}
             </h3>
             <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">

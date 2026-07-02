@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import PropertyInfo from "@/components/properties/PropertyInfo";
 import PropertyGallery from "@/components/properties/PropertyGallery";
+import PropertyMapWrapper from "@/components/map/PropertyMapWrapper";
 import HostCard from "@/components/properties/HostCard";
 import AmenitiesGrid from "@/components/properties/AmenitiesGrid";
 import ReviewList from "@/components/reviews/ReviewList";
@@ -70,6 +71,22 @@ export default async function PropertyDetailPage({
 
           <AmenitiesGrid amenities={property.amenities} />
 
+          {/* Location map */}
+          <section>
+            <h2 className="mb-3 text-lg font-semibold text-text-primary">
+              Location
+            </h2>
+            <Suspense fallback={<Skeleton variant="map" />}>
+              <PropertyMapWrapper
+                properties={[property]}
+                center={[property.lat, property.lng]}
+                zoom={14}
+                height="300px"
+                singleMode
+              />
+            </Suspense>
+          </section>
+
           {/* Divider */}
           <div className="border-t border-gray-light" />
 
@@ -78,9 +95,9 @@ export default async function PropertyDetailPage({
 
         {/* Right column: sticky booking card */}
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-xl border border-gray-light p-6 shadow-sm">
+          <div className="rounded-xl border border-gray-light p-6 shadow-soft-sm">
             <div className="mb-4">
-              <p className="text-2xl font-bold text-secondary">
+              <p className="text-2xl font-bold text-text-primary">
                 ${property.pricePerNight}
                 <span className="text-base font-normal text-gray-soft">
                   {" "}night
@@ -89,8 +106,10 @@ export default async function PropertyDetailPage({
             </div>
 
             <div className="mb-4 flex items-center gap-1 text-sm">
-              <span className="text-primary" aria-hidden="true">★</span>
-              <span className="font-medium text-secondary">
+              <svg className="h-4 w-4 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span className="font-medium text-text-primary">
                 {property.reviews.length > 0
                   ? (
                       property.reviews.reduce(
@@ -108,7 +127,7 @@ export default async function PropertyDetailPage({
 
             <button
               type="button"
-              className="w-full rounded-lg bg-primary py-3 text-sm font-semibold text-bg transition-colors hover:bg-primary-dark"
+              className="w-full cursor-pointer rounded-lg bg-primary py-3 text-sm font-semibold text-bg transition-colors hover:bg-primary-dark"
             >
               Reserve
             </button>
@@ -119,17 +138,17 @@ export default async function PropertyDetailPage({
             <div className="mt-4 space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-soft underline">${property.pricePerNight} x 1 night</span>
-                <span className="text-secondary">${property.pricePerNight}</span>
+                <span className="text-text-primary">${property.pricePerNight}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-soft underline">Cleaning fee</span>
-                <span className="text-secondary">$50</span>
+                <span className="text-text-primary">$50</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-soft underline">Service fee</span>
-                <span className="text-secondary">$25</span>
+                <span className="text-text-primary">$25</span>
               </div>
-              <div className="flex justify-between border-t border-gray-light pt-2 font-semibold text-secondary">
+              <div className="flex justify-between border-t border-gray-light pt-2 font-semibold text-text-primary">
                 <span>Total</span>
                 <span>${property.pricePerNight + 75}</span>
               </div>

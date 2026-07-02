@@ -67,16 +67,8 @@ export const CATEGORIES: Category[] = [
   "Tropical",
 ];
 
-export const CATEGORY_ICONS: Record<Category, string> = {
-  Beach: "🏖️",
-  Mountain: "🏔️",
-  City: "🏙️",
-  Countryside: "🌾",
-  Modern: "🏗️",
-  Lake: "🏞️",
-  Cabin: "🪵",
-  Tropical: "🌴",
-};
+// Category icons — legacy alias kept for backward compat; use CategoryIcon component instead
+export const CATEGORY_ICONS: Record<Category, string> = {} as Record<Category, string>;
 
 export interface SearchFilters {
   category?: string;

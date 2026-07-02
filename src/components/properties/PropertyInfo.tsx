@@ -14,7 +14,7 @@ export default function PropertyInfo({ property }: PropertyInfoProps) {
     <section>
       {/* Title and location */}
       <div className="mb-4">
-        <h1 className="text-2xl font-bold text-secondary sm:text-3xl">
+        <h1 className="text-2xl font-bold text-text-primary sm:text-3xl">
           {property.title}
         </h1>
         <p className="mt-1 text-base text-gray-soft">
@@ -23,7 +23,7 @@ export default function PropertyInfo({ property }: PropertyInfoProps) {
       </div>
 
       {/* Quick stats line */}
-      <div className="mb-4 flex flex-wrap items-center gap-2 text-sm text-secondary">
+      <div className="mb-4 flex flex-wrap items-center gap-2 text-sm text-text-primary">
         {property.maxGuests > 0 && (
           <span className="flex items-center gap-1">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -47,8 +47,8 @@ export default function PropertyInfo({ property }: PropertyInfoProps) {
       </div>
 
       {/* Price */}
-      <div className="mb-6 rounded-xl border border-gray-light bg-gray-light/10 p-4">
-        <p className="text-2xl font-bold text-secondary">
+      <div className="mb-6 rounded-xl border border-gray-light bg-muted/20 p-4">
+        <p className="text-2xl font-bold text-text-primary">
           {formatPrice(property.pricePerNight)}
           <span className="text-base font-normal text-gray-soft"> night</span>
         </p>
@@ -56,7 +56,7 @@ export default function PropertyInfo({ property }: PropertyInfoProps) {
 
       {/* Description */}
       <div className="border-t border-gray-light pt-6">
-        <h2 className="mb-3 text-lg font-semibold text-secondary">
+        <h2 className="mb-3 text-lg font-semibold text-text-primary">
           About this place
         </h2>
         <p className="leading-relaxed text-gray-soft">{property.description}</p>

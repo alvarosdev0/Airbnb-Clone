@@ -33,20 +33,3 @@ export function averageRating(
   const total = reviews.reduce((sum, review) => sum + review.rating, 0);
   return Math.round((total / reviews.length) * 10) / 10;
 }
-
-/**
- * Get a category icon emoji by category name.
- */
-export function getCategoryIcon(category: string): string {
-  const iconMap: Record<string, string> = {
-    Beach: "🏖️",
-    Mountain: "🏔️",
-    City: "🏙️",
-    Countryside: "🌾",
-    Modern: "🏗️",
-    Lake: "🏞️",
-    Cabin: "🪵",
-    Tropical: "🌴",
-  };
-  return iconMap[category] ?? "📍";
-}

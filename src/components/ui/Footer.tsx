@@ -12,17 +12,17 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   How it works
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Newsroom
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Careers
                 </Link>
               </li>
@@ -36,17 +36,17 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Diversity & Belonging
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Accessibility
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Friends & Family
                 </Link>
               </li>
@@ -60,17 +60,17 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Host your home
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Host an experience
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Resource center
                 </Link>
               </li>
@@ -84,17 +84,17 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Safety information
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-soft hover:text-secondary">
+                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
                   Cancellation options
                 </Link>
               </li>

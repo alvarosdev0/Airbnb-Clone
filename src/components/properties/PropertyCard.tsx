@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import PropertyImage from "@/components/ui/PropertyImage";
 import type { PropertyWithDetails } from "@/types";
 import { formatPrice, averageRating } from "@/lib/utils";
 
@@ -20,30 +21,31 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   return (
     <Link
       href={`/properties/${property.id}`}
-      className="group block overflow-hidden rounded-xl transition-all hover:shadow-lg"
+      className="group block cursor-pointer overflow-hidden rounded-xl transition-all duration-200 hover:shadow-soft-md"
     >
-      {/* Thumbnail */}
+      {/* Thumbnail with error fallback */}
       <div className="relative aspect-[4/3] overflow-hidden bg-gray-light/50">
-        <Image
+        <PropertyImage
           src={imageUrl}
           alt={property.title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
         />
       </div>
 
       {/* Card info */}
       <div className="p-3">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="line-clamp-1 text-sm font-semibold text-secondary">
+          <h3 className="line-clamp-1 text-sm font-semibold text-text-primary">
             {property.title}
           </h3>
           {rating > 0 && (
             <div className="flex shrink-0 items-center gap-0.5 text-sm">
-              <span className="text-primary" aria-hidden="true">★</span>
-              <span className="font-medium text-secondary">{rating}</span>
+              <svg className="h-3.5 w-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span className="font-medium text-text-primary">{rating}</span>
             </div>
           )}
         </div>
@@ -53,7 +55,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         </p>
 
         <p className="mt-1 text-sm">
-          <span className="font-semibold text-secondary">
+          <span className="font-semibold text-text-primary">
             {formatPrice(property.pricePerNight)}
           </span>
           <span className="text-gray-soft"> night</span>

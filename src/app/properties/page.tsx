@@ -113,7 +113,7 @@ export default async function PropertiesPage({
         {/* Property grid */}
         <div>
           <div className="mb-4 flex items-center justify-between">
-            <h1 className="text-xl font-bold text-secondary">
+            <h1 className="text-xl font-bold text-text-primary">
               {category ? `${category} stays` : "All properties"}
             </h1>
             <p className="text-sm text-gray-soft">
@@ -133,19 +133,21 @@ export default async function PropertiesPage({
           >
             {properties.length === 0 ? (
               <div className="flex min-h-[300px] flex-col items-center justify-center rounded-xl border border-gray-light bg-gray-light/10 px-4 py-16 text-center">
-                <div className="mb-3 text-4xl" aria-hidden="true">
-                  🔍
+                <div aria-hidden="true">
+                  <svg className="mb-2 h-10 w-10 text-gray-soft/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
                 </div>
-                <p className="text-lg font-medium text-secondary">
+                <p className="text-lg font-medium text-text-primary">
                   No properties match your search
                 </p>
                 <p className="mt-1 text-sm text-gray-soft">
-                  Try adjusting your filters or search criteria.
+                  Try searching for a different city, adjusting your price range, or browsing a category below.
                 </p>
                 {hasActiveFilters && (
                   <Link
                     href="/properties"
-                    className="mt-4 rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-bg transition-colors hover:bg-primary-dark"
+                    className="mt-4 cursor-pointer rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-bg transition-colors hover:bg-primary-dark"
                   >
                     Clear all filters
                   </Link>

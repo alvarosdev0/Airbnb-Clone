@@ -3,13 +3,14 @@
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useCallback } from "react";
 import type { Category } from "@/types";
-import { CATEGORIES, CATEGORY_ICONS } from "@/types";
+import { CATEGORIES } from "@/types";
+import CategoryIcon from "@/components/category/CategoryIcon";
 import { cn } from "@/lib/utils";
 
 /**
  * Client Component: horizontal scrollable category pill bar.
  * Clicking a pill updates the URL searchParams to `?category=X`.
- * Active pill is highlighted with the primary Airbnb color.
+ * Active pill is highlighted with the primary color.
  */
 export default function CategoryBar() {
   const router = useRouter();
@@ -50,15 +51,13 @@ export default function CategoryBar() {
                 type="button"
                 onClick={() => handleSelect(category)}
                 className={cn(
-                  "flex shrink-0 flex-col items-center gap-1.5 pb-2 text-sm transition-colors",
+                  "flex shrink-0 cursor-pointer flex-col items-center gap-1.5 pb-2 text-sm transition-colors duration-200",
                   isActive
-                    ? "border-b-2 border-secondary text-secondary"
-                    : "border-b-2 border-transparent text-gray-soft hover:border-gray-light hover:text-secondary",
+                    ? "border-b-2 border-primary text-primary"
+                    : "border-b-2 border-transparent text-gray-soft hover:border-gray-light hover:text-text-primary",
                 )}
               >
-                <span className="text-2xl" role="img" aria-label={category}>
-                  {CATEGORY_ICONS[category]}
-                </span>
+                <CategoryIcon category={category} className="text-2xl" />
                 <span className="whitespace-nowrap text-xs font-medium">
                   {category}
                 </span>

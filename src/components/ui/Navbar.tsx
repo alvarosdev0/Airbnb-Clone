@@ -5,7 +5,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-gray-light bg-bg/95 backdrop-blur supports-[backdrop-filter]:bg-bg/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-1 text-primary hover:opacity-90">
+        <Link href="/" className="flex cursor-pointer items-center gap-1 text-primary hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">
           <svg
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -21,13 +21,13 @@ export default function Navbar() {
         <div className="hidden items-center gap-6 sm:flex">
           <Link
             href="/properties"
-            className="text-sm font-medium text-gray-soft transition-colors hover:text-secondary"
+            className="cursor-pointer text-sm font-medium text-gray-soft transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"
           >
             Explore
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-1 text-sm font-medium text-gray-soft transition-colors hover:text-secondary"
+            className="flex cursor-pointer items-center gap-1 text-sm font-medium text-gray-soft transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ export default function Navbar() {
         {/* Mobile menu placeholder */}
         <button
           type="button"
-          className="inline-flex items-center gap-2 rounded-full border border-gray-light p-2 text-sm sm:hidden"
+          className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-gray-light p-2 text-sm transition-colors duration-200 hover:border-primary focus-visible:ring-2 focus-visible:ring-primary sm:hidden"
           aria-label="Menu"
         >
           <svg

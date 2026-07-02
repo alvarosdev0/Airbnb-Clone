@@ -37,8 +37,8 @@ export default function SearchFilters() {
   const hasActiveFilters = !!(city || minPrice || maxPrice || category);
 
   return (
-    <div className="rounded-xl border border-gray-light bg-bg p-4 shadow-sm">
-      <h2 className="mb-3 text-sm font-semibold text-secondary">Filters</h2>
+    <div className="rounded-xl border border-gray-light bg-bg p-4 shadow-soft-sm">
+      <h2 className="mb-3 text-sm font-semibold text-text-primary">Filters</h2>
 
       <div className="space-y-3">
         {/* City */}
@@ -55,7 +55,7 @@ export default function SearchFilters() {
             value={city}
             onChange={(e) => updateParam("city", e.target.value)}
             placeholder="Any city"
-            className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-secondary outline-none transition-colors focus:border-primary"
+            className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
           />
         </div>
 
@@ -71,8 +71,8 @@ export default function SearchFilters() {
               onChange={(e) => updateParam("minPrice", e.target.value)}
               placeholder="Min"
               min={0}
-              className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-secondary outline-none transition-colors focus:border-primary"
-              aria-label="Minimum price"
+className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
+               aria-label="Minimum price"
             />
             <span className="text-gray-soft">—</span>
             <input
@@ -81,8 +81,8 @@ export default function SearchFilters() {
               onChange={(e) => updateParam("maxPrice", e.target.value)}
               placeholder="Max"
               min={0}
-              className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-secondary outline-none transition-colors focus:border-primary"
-              aria-label="Maximum price"
+className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
+               aria-label="Maximum price"
             />
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function SearchFilters() {
             <label className="mb-1 block text-xs font-medium text-gray-soft">
               Category
             </label>
-            <p className="rounded-lg bg-gray-light/30 px-3 py-2 text-sm text-secondary">
+            <p className="rounded-lg bg-muted/30 px-3 py-2 text-sm text-text-primary">
               {category}
             </p>
           </div>
@@ -104,7 +104,7 @@ export default function SearchFilters() {
           <button
             type="button"
             onClick={clearFilters}
-            className="w-full rounded-lg border border-secondary px-3 py-2 text-sm font-medium text-secondary transition-colors hover:bg-secondary hover:text-bg"
+            className="w-full cursor-pointer rounded-lg border border-secondary px-3 py-2 text-sm font-medium text-secondary transition-colors hover:bg-secondary hover:text-bg"
           >
             Clear filters
           </button>
