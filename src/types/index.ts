@@ -1,27 +1,53 @@
 // ---------------------------------------------------------------------------
-// Domain types — standalone, no Prisma dependency.
-// The shape mirrors what the data service returns (currently mock data,
-// swappable to any API in the future).
+// Travelio — Domain types for the destination explorer
+// Data comes from OpenStreetMap (Overpass API) + Wikidata (photos)
 // ---------------------------------------------------------------------------
 
-export interface Host {
+export type TravelioCategory =
+  | "Beach" | "Mountain" | "City" | "Countryside"
+  | "Modern" | "Lake" | "Cabin" | "Tropical";
+
+export const CATEGORIES: TravelioCategory[] = [
+  "Beach", "Mountain", "City", "Countryside",
+  "Modern", "Lake", "Cabin", "Tropical",
+];
+
+export interface TravelioProperty {
   id: string;
   name: string;
-  image: string | null;
-  bio?: string | null;
+  description?: string;
+  category: string;
+  type: string; // hotel, guest_house, chalet, apartment, etc.
+  stars?: number;
+  address?: string;
+  city?: string;
+  country?: string;
+  lat: number;
+  lng: number;
+  amenities: string[];
+  images: string[];
+  website?: string;
+  phone?: string;
+  wikidata?: string;
 }
 
-export interface Review {
-  id: string;
-  rating: number;
-  comment: string;
-  userId: string;
-  user: Pick<Host, "id" | "name" | "image">;
-  propertyId: string;
-  createdAt: Date;
+export interface CitySearchResult {
+  lat: number;
+  lng: number;
+  bbox: [number, number, number, number];
+  displayName: string;
 }
 
-export interface Property {
+// ---------------------------------------------------------------------------
+// Backward-compatible aliases — will be removed in PR 3 when old components
+// are migrated to TravelioProperty / TravelioCategory.
+// ---------------------------------------------------------------------------
+
+/** @deprecated Use TravelioCategory instead. */
+export type Category = TravelioCategory;
+
+/** @deprecated Will be removed in PR 3. Replaced by TravelioProperty. */
+export interface PropertyWithDetails {
   id: string;
   title: string;
   description: string;
@@ -38,45 +64,11 @@ export interface Property {
   amenities: string[];
   images: string[];
   hostId: string;
-}
-
-export interface PropertyWithDetails extends Property {
-  host: Host;
-  reviews: Review[];
+  host: { id: string; name: string; image: string | null; bio?: string | null };
+  reviews: Array<{
+    id: string; rating: number; comment: string;
+    userId: string; propertyId: string; createdAt: Date;
+    user: { id: string; name: string; image: string | null };
+  }>;
   createdAt: Date;
-}
-
-// ---------------------------------------------------------------------------
-// Domain enums & constants
-// ---------------------------------------------------------------------------
-
-export type Category =
-  | "Beach"
-  | "Mountain"
-  | "City"
-  | "Countryside"
-  | "Modern"
-  | "Lake"
-  | "Cabin"
-  | "Tropical";
-
-export const CATEGORIES: Category[] = [
-  "Beach",
-  "Mountain",
-  "City",
-  "Countryside",
-  "Modern",
-  "Lake",
-  "Cabin",
-  "Tropical",
-];
-
-// Legacy alias kept for backward compat; use CategoryIcon component instead
-export const CATEGORY_ICONS: Record<Category, string> = {} as Record<Category, string>;
-
-export interface SearchFilters {
-  category?: string;
-  city?: string;
-  minPrice?: number;
-  maxPrice?: number;
 }
