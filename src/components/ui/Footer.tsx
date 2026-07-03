@@ -4,7 +4,26 @@ export default function Footer() {
   return (
     <footer className="border-t border-gray-light bg-bg">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3">
+          {/* Explore */}
+          <div>
+            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-soft">
+              Explore
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/properties" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
+                  Destinations
+                </Link>
+              </li>
+              <li>
+                <Link href="/" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
+                  Categories
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           {/* About */}
           <div>
             <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-soft">
@@ -18,60 +37,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Newsroom
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Careers
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Community */}
-          <div>
-            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-soft">
-              Community
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Diversity & Belonging
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Accessibility
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Friends & Family
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Host */}
-          <div>
-            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-soft">
-              Host
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Host your home
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Host an experience
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Resource center
+                  OpenStreetMap
                 </Link>
               </li>
             </ul>
@@ -93,18 +59,13 @@ export default function Footer() {
                   Safety information
                 </Link>
               </li>
-              <li>
-                <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  Cancellation options
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-8 border-t border-gray-light pt-6">
           <p className="text-center text-xs text-gray-soft">
-            &copy; {new Date().getFullYear()} Airbnb Clone. All rights reserved. This is a portfolio project.
+            &copy; {new Date().getFullYear()} Travelio. All rights reserved. A portfolio project powered by OpenStreetMap.
           </p>
         </div>
       </div>

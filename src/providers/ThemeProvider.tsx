@@ -11,7 +11,7 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-const STORAGE_KEY = "airbnb-theme";
+const STORAGE_KEY = "travelio-theme";
 
 function getStoredTheme(): Theme {
   if (typeof window === "undefined") return "light";

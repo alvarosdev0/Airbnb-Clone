@@ -18,9 +18,9 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Airbnb Clone — Discover Places to Stay",
+  title: "Travelio — Discover real places",
   description:
-    "Browse vacation rentals, cabins, beach houses, and more. Your next getaway starts here.",
+    "Explore real destinations worldwide. Data from OpenStreetMap.",
 };
 
 export default function RootLayout({
@@ -42,7 +42,7 @@ export default function RootLayout({
               __html: `
                 (function() {
                   try {
-                    var theme = localStorage.getItem('airbnb-theme');
+                    var theme = localStorage.getItem('travelio-theme');
                     if (theme === 'dark') {
                       document.documentElement.classList.add('dark');
                     } else {
@@ -59,6 +59,10 @@ export default function RootLayout({
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
+            {/* Demo banner */}
+            <div className="fixed bottom-3 left-3 z-50 rounded-full bg-primary/90 px-3 py-1 text-xs font-medium tracking-wide text-bg shadow-sm backdrop-blur-sm">
+              Demo — Datos reales de OpenStreetMap
+            </div>
           </ThemeProvider>
         </body>
       </html>
