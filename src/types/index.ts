@@ -39,8 +39,9 @@ export interface CitySearchResult {
 }
 
 // ---------------------------------------------------------------------------
-// Backward-compatible aliases — will be removed in PR 3 when old components
-// are migrated to TravelioProperty / TravelioCategory.
+// Legacy types — used by old components until PR 3 migration.
+// Will be removed in PR 3 when old components are migrated to
+// TravelioProperty / TravelioCategory.
 // ---------------------------------------------------------------------------
 
 /** @deprecated Use TravelioCategory instead. */
@@ -71,4 +72,14 @@ export interface PropertyWithDetails {
     user: { id: string; name: string; image: string | null };
   }>;
   createdAt: Date;
+}
+
+/** @deprecated Legacy alias kept for backward compat */
+export const CATEGORY_ICONS: Record<Category, string> = {} as Record<Category, string>;
+
+export interface SearchFilters {
+  category?: string;
+  city?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }
