@@ -1,8 +1,8 @@
 import PropertyCard from "./PropertyCard";
-import type { PropertyWithDetails } from "@/types";
+import type { TravelioProperty } from "@/types";
 
 interface PropertyGridProps {
-  properties: PropertyWithDetails[];
+  properties: TravelioProperty[];
   emptyMessage?: string;
 }
 

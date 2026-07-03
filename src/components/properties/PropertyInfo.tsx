@@ -1,21 +1,21 @@
-import type { PropertyWithDetails } from "@/types";
-import { formatPrice } from "@/lib/utils";
+import type { TravelioProperty } from "@/types";
+import AmenitiesGrid from "./AmenitiesGrid";
 
 interface PropertyInfoProps {
-  property: PropertyWithDetails;
+  property: TravelioProperty;
 }
 
 /**
- * Server Component: displays basic property information.
- * Title, location, price, bed/bath/guest count, and description.
+ * Server Component: displays Travelio property information.
+ * Name, description, OSM star rating, amenities, website, and phone.
  */
 export default function PropertyInfo({ property }: PropertyInfoProps) {
   return (
     <section>
-      {/* Title and location */}
+      {/* Name and location */}
       <div className="mb-4">
         <h1 className="text-2xl font-bold text-text-primary sm:text-3xl">
-          {property.title}
+          {property.name}
         </h1>
         <p className="mt-1 text-base text-gray-soft">
           {property.city}, {property.country}
@@ -23,43 +23,70 @@ export default function PropertyInfo({ property }: PropertyInfoProps) {
       </div>
 
       {/* Quick stats line */}
-      <div className="mb-4 flex flex-wrap items-center gap-2 text-sm text-text-primary">
-        {property.maxGuests > 0 && (
-          <span className="flex items-center gap-1">
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-            </svg>
-            {property.maxGuests} {property.maxGuests === 1 ? "guest" : "guests"}
+      {property.stars != null && property.stars > 0 && (
+        <div className="mb-4 flex items-center gap-2 text-sm text-text-primary">
+          <span className="flex items-center gap-1" aria-label={`${property.stars} out of 5 stars`}>
+            <span aria-hidden="true" className="text-accent">⭐</span>
+            <span className="font-medium">{property.stars}</span>
+            <span className="text-gray-soft">· OSM rating</span>
           </span>
-        )}
-        {property.bedrooms > 0 && (
-          <>
-            <span className="text-gray-soft">·</span>
-            <span>{property.bedrooms} {property.bedrooms === 1 ? "bedroom" : "bedrooms"}</span>
-          </>
-        )}
-        {property.bathrooms > 0 && (
-          <>
-            <span className="text-gray-soft">·</span>
-            <span>{property.bathrooms} {property.bathrooms === 1 ? "bathroom" : "bathrooms"}</span>
-          </>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* Price */}
-      <div className="mb-6 rounded-xl border border-gray-light bg-muted/20 p-4">
-        <p className="text-2xl font-bold text-text-primary">
-          {formatPrice(property.pricePerNight)}
-          <span className="text-base font-normal text-gray-soft"> night</span>
-        </p>
+      {/* Category & Type badge */}
+      <div className="mb-4 flex flex-wrap gap-2">
+        <span className="rounded-full bg-primary-dark/10 px-3 py-1 text-xs font-medium text-primary-dark dark:bg-primary/10 dark:text-primary">
+          {property.category}
+        </span>
+        <span className="rounded-full bg-gray-light/50 px-3 py-1 text-xs font-medium text-text-secondary">
+          {property.type}
+        </span>
       </div>
 
       {/* Description */}
+      {property.description && (
+        <div className="border-t border-gray-light pt-6">
+          <h2 className="mb-3 text-lg font-semibold text-text-primary">
+            About this place
+          </h2>
+          <p className="leading-relaxed text-gray-soft">{property.description}</p>
+        </div>
+      )}
+
+      {/* Amenities */}
       <div className="border-t border-gray-light pt-6">
-        <h2 className="mb-3 text-lg font-semibold text-text-primary">
-          About this place
-        </h2>
-        <p className="leading-relaxed text-gray-soft">{property.description}</p>
+        <AmenitiesGrid amenities={property.amenities} />
+      </div>
+
+      {/* Website & Phone */}
+      <div className="mt-6 border-t border-gray-light pt-6">
+        <div className="space-y-3">
+          {property.website && (
+            <div className="flex items-center gap-2 text-sm">
+              <svg className="h-4 w-4 shrink-0 text-gray-soft" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.86-1.707l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+              </svg>
+              <a
+                href={property.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline-offset-2 hover:underline"
+              >
+                Sitio web oficial
+              </a>
+            </div>
+          )}
+          {property.phone && (
+            <div className="flex items-center gap-2 text-sm">
+              <svg className="h-4 w-4 shrink-0 text-gray-soft" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              </svg>
+              <a href={`tel:${property.phone}`} className="text-text-primary hover:underline">
+                {property.phone}
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
