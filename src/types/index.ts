@@ -1,7 +1,45 @@
 // ---------------------------------------------------------------------------
-// Domain types — standalone, no Prisma dependency.
-// The shape mirrors what the data service returns (currently mock data,
-// swappable to any API in the future).
+// Travelio — Domain types for the destination explorer
+// Data comes from OpenStreetMap (Overpass API) + Wikidata (photos)
+// ---------------------------------------------------------------------------
+
+export type TravelioCategory =
+  | "Beach" | "Mountain" | "City" | "Countryside"
+  | "Modern" | "Lake" | "Cabin" | "Tropical";
+
+export const CATEGORIES: TravelioCategory[] = [
+  "Beach", "Mountain", "City", "Countryside",
+  "Modern", "Lake", "Cabin", "Tropical",
+];
+
+export interface TravelioProperty {
+  id: string;
+  name: string;
+  description?: string;
+  category: string;
+  type: string; // hotel, guest_house, chalet, apartment, etc.
+  stars?: number;
+  address?: string;
+  city?: string;
+  country?: string;
+  lat: number;
+  lng: number;
+  amenities: string[];
+  images: string[];
+  website?: string;
+  phone?: string;
+  wikidata?: string;
+}
+
+export interface CitySearchResult {
+  lat: number;
+  lng: number;
+  bbox: [number, number, number, number];
+  displayName: string;
+}
+
+// ---------------------------------------------------------------------------
+// Legacy types — used by old components until PR 3 migration.
 // ---------------------------------------------------------------------------
 
 export interface Host {
@@ -46,32 +84,10 @@ export interface PropertyWithDetails extends Property {
   createdAt: Date;
 }
 
-// ---------------------------------------------------------------------------
-// Domain enums & constants
-// ---------------------------------------------------------------------------
+/** @deprecated Use TravelioCategory instead. */
+export type Category = TravelioCategory;
 
-export type Category =
-  | "Beach"
-  | "Mountain"
-  | "City"
-  | "Countryside"
-  | "Modern"
-  | "Lake"
-  | "Cabin"
-  | "Tropical";
-
-export const CATEGORIES: Category[] = [
-  "Beach",
-  "Mountain",
-  "City",
-  "Countryside",
-  "Modern",
-  "Lake",
-  "Cabin",
-  "Tropical",
-];
-
-// Legacy alias kept for backward compat; use CategoryIcon component instead
+// Legacy alias kept for backward compat
 export const CATEGORY_ICONS: Record<Category, string> = {} as Record<Category, string>;
 
 export interface SearchFilters {
