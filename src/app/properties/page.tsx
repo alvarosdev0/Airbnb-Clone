@@ -10,8 +10,6 @@ interface PropertiesPageProps {
   searchParams: Promise<{
     category?: string;
     city?: string;
-    minPrice?: string;
-    maxPrice?: string;
   }>;
 }
 
@@ -26,17 +24,13 @@ export default async function PropertiesPage({
   const params = await searchParams;
   const category = params.category;
   const city = params.city;
-  const minPrice = params.minPrice ? Number(params.minPrice) : undefined;
-  const maxPrice = params.maxPrice ? Number(params.maxPrice) : undefined;
 
   const properties = await getProperties({
     category,
     city,
-    minPrice,
-    maxPrice,
   });
 
-  const hasActiveFilters = !!(category || city || minPrice !== undefined || maxPrice !== undefined);
+  const hasActiveFilters = !!(category || city);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -86,7 +80,7 @@ export default async function PropertiesPage({
                   No properties match your search
                 </p>
                 <p className="mt-1 text-sm text-gray-soft">
-                  Try searching for a different city, adjusting your price range, or browsing a category below.
+                  Try searching for a different city or browsing a category below.
                 </p>
                 {hasActiveFilters && (
                   <Link
