@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Skeleton from "@/components/ui/Skeleton";
 import MapErrorBoundary from "./MapErrorBoundary";
-import type { PropertyWithDetails } from "@/types";
+import type { TravelioProperty } from "@/types";
 
 /**
  * Client Component wrapper that dynamically imports LeafletMap with ssr:false.
@@ -20,7 +20,7 @@ const LeafletMap = dynamic(() => import("./LeafletMap"), {
 });
 
 interface PropertyMapWrapperProps {
-  properties: PropertyWithDetails[];
+  properties: TravelioProperty[];
   center?: [number, number];
   zoom?: number;
   height?: string;

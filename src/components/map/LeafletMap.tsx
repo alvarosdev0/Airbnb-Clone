@@ -4,8 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
-import { formatPrice } from "@/lib/utils";
-import type { PropertyWithDetails } from "@/types";
+import type { TravelioProperty } from "@/types";
 
 /**
  * Fix Leaflet default marker icon (known webpack/Next.js bundling issue).
@@ -22,7 +21,7 @@ L.Icon.Default.mergeOptions({
 });
 
 interface LeafletMapProps {
-  properties: PropertyWithDetails[];
+  properties: TravelioProperty[];
   center?: [number, number];
   zoom?: number;
   height?: string;
@@ -102,7 +101,7 @@ export default function LeafletMap({
                   >
                     <img
                       src={property.images[0] ?? ""}
-                      alt={property.title}
+                      alt={property.name}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -112,7 +111,7 @@ export default function LeafletMap({
                     />
                   </div>
 
-                  {/* Title */}
+                  {/* Name */}
                   <p
                     style={{
                       fontWeight: 600,
@@ -121,7 +120,18 @@ export default function LeafletMap({
                       lineHeight: 1.3,
                     }}
                   >
-                    {property.title}
+                    {property.name}
+                  </p>
+
+                  {/* Category & Type */}
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#64748B",
+                      margin: "2px 0 4px",
+                    }}
+                  >
+                    {property.category} · {property.type}
                   </p>
 
                   {/* Location */}
@@ -133,14 +143,6 @@ export default function LeafletMap({
                     }}
                   >
                     {property.city}, {property.country}
-                  </p>
-
-                  {/* Price */}
-                  <p style={{ fontWeight: 700, fontSize: "14px", margin: 0 }}>
-                    {formatPrice(property.pricePerNight)}
-                    <span style={{ fontWeight: 400, color: "#64748B" }}>
-                      {" "}night
-                    </span>
                   </p>
 
                   {/* Detail link */}
