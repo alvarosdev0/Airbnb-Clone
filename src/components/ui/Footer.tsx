@@ -37,7 +37,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#" className="cursor-pointer text-sm text-gray-soft transition-colors duration-200 hover:text-primary">
-                  OpenStreetMap
+                  About this project
                 </Link>
               </li>
             </ul>
@@ -65,7 +65,7 @@ export default function Footer() {
 
         <div className="mt-8 border-t border-gray-light pt-6">
           <p className="text-center text-xs text-gray-soft">
-            &copy; {new Date().getFullYear()} Travelio. All rights reserved. A portfolio project powered by OpenStreetMap.
+            &copy; {new Date().getFullYear()} Travelio. All rights reserved. A portfolio demo — all properties are fictitious.
           </p>
         </div>
       </div>

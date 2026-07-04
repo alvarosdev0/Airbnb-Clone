@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import Link from "next/link";
 import PropertyGrid from "@/components/properties/PropertyGrid";
 import CategoryBar from "@/components/category/CategoryBar";
-import PropertyMapWrapper from "@/components/map/PropertyMapWrapper";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
 import { getProperties } from "@/lib/data-service";
@@ -99,20 +98,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </Suspense>
       </div>
 
-      {/* Map Section */}
-      <div className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
-        <h2 className="mb-4 text-xl font-bold text-text-primary">
-          Explore locations
-        </h2>
-        <Suspense fallback={<Skeleton variant="map" />}>
-          <PropertyMapWrapper
-            properties={properties}
-            zoom={2}
-            height="250px"
-            className="sm:!h-[400px]"
-          />
-        </Suspense>
-      </div>
     </div>
   );
 }

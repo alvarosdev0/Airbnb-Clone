@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import PropertyInfo from "@/components/properties/PropertyInfo";
 import PropertyGallery from "@/components/properties/PropertyGallery";
-import PropertyMapWrapper from "@/components/map/PropertyMapWrapper";
 import HostCard from "@/components/properties/HostCard";
 import AmenitiesGrid from "@/components/properties/AmenitiesGrid";
 import ReviewList from "@/components/reviews/ReviewList";
@@ -44,22 +43,6 @@ export default async function PropertyDetailPage({
           <HostCard host={property.host} />
 
           <AmenitiesGrid amenities={property.amenities} />
-
-          {/* Location map */}
-          <section>
-            <h2 className="mb-3 text-lg font-semibold text-text-primary">
-              Location
-            </h2>
-            <Suspense fallback={<Skeleton variant="map" />}>
-              <PropertyMapWrapper
-                properties={[property]}
-                center={[property.lat, property.lng]}
-                zoom={14}
-                height="300px"
-                singleMode
-              />
-            </Suspense>
-          </section>
 
           {/* Divider */}
           <div className="border-t border-gray-light" />

@@ -1,59 +1,79 @@
 import type { PropertyWithDetails } from "@/types";
 
 /**
- * Standalone mock data: 25 properties across 8 categories.
- * Used by the data service layer until a real API is integrated.
+ * Standalone mock data: 25 fictitious properties across 8 categories.
+ * Images from loremflickr.com — real Flickr photos themed by keyword.
+ * All properties, locations, hosts, and reviews are fictitious.
  */
+
+// ---------------------------------------------------------------------------
+// Image helpers — loremflickr with lock for consistent results
+// ---------------------------------------------------------------------------
+
+const IMG = (keyword: string, lock: number) =>
+  `https://loremflickr.com/800/600/${keyword.replace(/ /g, ",")}?lock=${lock}`;
+
+const HOST = (lock: number) =>
+  `https://loremflickr.com/200/200/portrait,face?lock=${lock}`;
+
+// ---------------------------------------------------------------------------
+// Hosts (fictitious)
+// ---------------------------------------------------------------------------
+
 const hostUsers = [
   {
     id: "mock-host-1",
     name: "Sophie Laurent",
-    image: "https://picsum.photos/seed/host1/200/200",
+    image: HOST(301),
     bio: "Parisian host and art curator. I love hosting travelers from around the world.",
   },
   {
     id: "mock-host-2",
     name: "James Cooper",
-    image: "https://picsum.photos/seed/host2/200/200",
+    image: HOST(302),
     bio: "Adventure photographer based in Vancouver. My properties are curated for those who love nature.",
   },
   {
     id: "mock-host-3",
     name: "Maria Rodríguez",
-    image: "https://picsum.photos/seed/host3/200/200",
+    image: HOST(303),
     bio: "Born and raised in Barcelona. I manage several vacation rentals.",
   },
   {
     id: "mock-host-4",
     name: "Takeshi Yamamoto",
-    image: "https://picsum.photos/seed/host4/200/200",
+    image: HOST(304),
     bio: "Tokyo-based designer. My spaces blend traditional Japanese aesthetics with modern minimalism.",
   },
   {
     id: "mock-host-5",
     name: "Emily Chen",
-    image: "https://picsum.photos/seed/host5/200/200",
+    image: HOST(305),
     bio: "Digital nomad turned host. I split my time between Bali and Sydney.",
   },
   {
     id: "mock-host-6",
     name: "Carlos Mendes",
-    image: "https://picsum.photos/seed/host6/200/200",
+    image: HOST(306),
     bio: "Lisbon local and food enthusiast. My apartments are in the best neighborhoods.",
   },
   {
     id: "mock-host-7",
     name: "Amara Okafor",
-    image: "https://picsum.photos/seed/host7/200/200",
+    image: HOST(307),
     bio: "Lagos-born, London-based architect. Each property reflects a unique design philosophy.",
   },
   {
     id: "mock-host-8",
     name: "Liam Murphy",
-    image: "https://picsum.photos/seed/host8/200/200",
+    image: HOST(308),
     bio: "Irish countryside enthusiast. I restored a 200-year-old farmhouse.",
   },
 ];
+
+// ---------------------------------------------------------------------------
+// Reviews (fictitious)
+// ---------------------------------------------------------------------------
 
 const reviewComments = [
   "Absolutely stunning place! The views were even better than the photos.",
@@ -115,6 +135,10 @@ function generateMockReviews(
   );
 }
 
+// ---------------------------------------------------------------------------
+// Property templates (ALL FICTITIOUS)
+// ---------------------------------------------------------------------------
+
 interface MockPropertyTemplate {
   title: string;
   description: string;
@@ -134,7 +158,9 @@ interface MockPropertyTemplate {
 }
 
 const propertyTemplates: MockPropertyTemplate[] = [
-  // Beach
+  // =========================================================================
+  // BEACH
+  // =========================================================================
   {
     title: "Seaside Paradise Villa",
     description: "Wake up to the sound of waves in this stunning beachfront villa. Floor-to-ceiling windows offer panoramic ocean views, and the private terrace is perfect for sunset cocktails. Steps from the sand.",
@@ -142,7 +168,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "12 Ocean Drive", city: "Malibu", country: "United States",
     lat: 34.0259, lng: -118.7798, category: "Beach",
     amenities: ["WiFi", "Pool", "Kitchen", "Air Conditioning", "Parking", "Ocean View"],
-    images: ["https://picsum.photos/seed/beach1a/800/600", "https://picsum.photos/seed/beach1b/800/600", "https://picsum.photos/seed/beach1c/800/600", "https://picsum.photos/seed/beach1d/800/600"],
+    images: [
+      IMG("beach house ocean malibu", 11),
+      IMG("beach villa luxury ocean", 12),
+      IMG("tropical beach paradise", 13),
+      IMG("ocean view beach house", 14),
+    ],
     hostIndex: 1,
   },
   {
@@ -152,7 +183,11 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "45 Coconut Lane", city: "Byron Bay", country: "Australia",
     lat: -28.6479, lng: 153.6022, category: "Beach",
     amenities: ["WiFi", "Kitchen", "Air Conditioning", "Garden", "Surfboard Storage"],
-    images: ["https://picsum.photos/seed/beach2a/800/600", "https://picsum.photos/seed/beach2b/800/600", "https://picsum.photos/seed/beach2c/800/600"],
+    images: [
+      IMG("beach bungalow tropical", 21),
+      IMG("surf beach australia coast", 22),
+      IMG("beach garden tropical", 23),
+    ],
     hostIndex: 4,
   },
   {
@@ -162,7 +197,13 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Blvd. Kukulcan KM 12", city: "Cancún", country: "Mexico",
     lat: 21.1209, lng: -86.7521, category: "Beach",
     amenities: ["WiFi", "Pool", "Kitchen", "Air Conditioning", "Gym", "Room Service"],
-    images: ["https://picsum.photos/seed/beach3a/800/600", "https://picsum.photos/seed/beach3b/800/600", "https://picsum.photos/seed/beach3c/800/600", "https://picsum.photos/seed/beach3d/800/600", "https://picsum.photos/seed/beach3e/800/600"],
+    images: [
+      IMG("white sand beach cancun", 31),
+      IMG("beach resort pool luxury", 32),
+      IMG("modern studio apartment beach", 33),
+      IMG("infinity pool beach resort", 34),
+      IMG("ocean front villa modern", 35),
+    ],
     hostIndex: 2,
   },
   {
@@ -172,10 +213,17 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Calle del Mar 8-15", city: "Cartagena", country: "Colombia",
     lat: 10.391, lng: -75.5144, category: "Beach",
     amenities: ["WiFi", "Pool", "Kitchen", "Air Conditioning", "Rooftop Terrace"],
-    images: ["https://picsum.photos/seed/beach4a/800/600", "https://picsum.photos/seed/beach4b/800/600", "https://picsum.photos/seed/beach4c/800/600"],
+    images: [
+      IMG("cartagena colorful colonial", 41),
+      IMG("caribbean cottage colorful", 42),
+      IMG("rooftop terrace ocean view", 43),
+    ],
     hostIndex: 2,
   },
-  // Mountain
+
+  // =========================================================================
+  // MOUNTAIN
+  // =========================================================================
   {
     title: "Alpine Chalet with View",
     description: "Luxurious wooden chalet nestled in the Swiss Alps. Floor-to-ceiling windows frame the Matterhorn. Hot tub on the deck, fireplace in the living room.",
@@ -183,7 +231,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Alpenstrasse 7", city: "Zermatt", country: "Switzerland",
     lat: 46.0207, lng: 7.7491, category: "Mountain",
     amenities: ["WiFi", "Kitchen", "Fireplace", "Hot Tub", "Ski Storage", "Parking", "Heated Floors"],
-    images: ["https://picsum.photos/seed/mtn1a/800/600", "https://picsum.photos/seed/mtn1b/800/600", "https://picsum.photos/seed/mtn1c/800/600", "https://picsum.photos/seed/mtn1d/800/600"],
+    images: [
+      IMG("swiss alps chalet zermatt", 51),
+      IMG("mountain chalet luxury alps", 52),
+      IMG("snow mountain alps switzerland", 53),
+      IMG("mountain cabin winter snow", 54),
+    ],
     hostIndex: 1,
   },
   {
@@ -193,7 +246,11 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "850 Pine Ridge Rd", city: "Aspen", country: "United States",
     lat: 39.1911, lng: -106.8175, category: "Mountain",
     amenities: ["WiFi", "Kitchen", "Fireplace", "Parking", "Pet Friendly"],
-    images: ["https://picsum.photos/seed/mtn2a/800/600", "https://picsum.photos/seed/mtn2b/800/600", "https://picsum.photos/seed/mtn2c/800/600"],
+    images: [
+      IMG("snowy mountain cabin aspen", 61),
+      IMG("rocky mountains cabin forest", 62),
+      IMG("aspen mountain cabin cozy", 63),
+    ],
     hostIndex: 0,
   },
   {
@@ -203,7 +260,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Camino del Inca 452", city: "Cusco", country: "Peru",
     lat: -13.5167, lng: -71.9781, category: "Mountain",
     amenities: ["WiFi", "Kitchen", "Breakfast Included", "Fireplace", "Guided Tours"],
-    images: ["https://picsum.photos/seed/mtn3a/800/600", "https://picsum.photos/seed/mtn3b/800/600", "https://picsum.photos/seed/mtn3c/800/600", "https://picsum.photos/seed/mtn3d/800/600"],
+    images: [
+      IMG("andes mountains peru cusco", 71),
+      IMG("mountain lodge view nature", 72),
+      IMG("peru cusco mountain landscape", 73),
+      IMG("andean mountains valley lodge", 74),
+    ],
     hostIndex: 3,
   },
   {
@@ -213,10 +275,17 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "45 Rue du Mont-Blanc", city: "Chamonix", country: "France",
     lat: 45.9237, lng: 6.8694, category: "Mountain",
     amenities: ["WiFi", "Kitchen", "Sauna", "Ski Storage", "Fireplace", "Parking", "Washer"],
-    images: ["https://picsum.photos/seed/mtn4a/800/600", "https://picsum.photos/seed/mtn4b/800/600", "https://picsum.photos/seed/mtn4c/800/600"],
+    images: [
+      IMG("ski chalet mountain chamonix", 81),
+      IMG("mont blanc france alps", 82),
+      IMG("chamonix winter alps ski", 83),
+    ],
     hostIndex: 7,
   },
-  // City
+
+  // =========================================================================
+  // CITY
+  // =========================================================================
   {
     title: "Manhattan Skyline Loft",
     description: "Industrial-chic loft in the heart of SoHo. Exposed brick walls, floor-to-ceiling windows, and a rooftop terrace with skyline views. Walk to world-class dining.",
@@ -224,7 +293,13 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "150 Greene Street", city: "New York", country: "United States",
     lat: 40.7243, lng: -73.9985, category: "City",
     amenities: ["WiFi", "Kitchen", "Air Conditioning", "Elevator", "Rooftop", "Washer", "Dryer"],
-    images: ["https://picsum.photos/seed/city1a/800/600", "https://picsum.photos/seed/city1b/800/600", "https://picsum.photos/seed/city1c/800/600", "https://picsum.photos/seed/city1d/800/600", "https://picsum.photos/seed/city1e/800/600"],
+    images: [
+      IMG("manhattan loft apartment nyc", 91),
+      IMG("nyc skyline apartment view", 92),
+      IMG("modern loft interior design", 93),
+      IMG("urban apartment city view", 94),
+      IMG("new york apartment soho loft", 95),
+    ],
     hostIndex: 0,
   },
   {
@@ -234,7 +309,11 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "2-15-1 Shibuya", city: "Tokyo", country: "Japan",
     lat: 35.6595, lng: 139.7004, category: "City",
     amenities: ["WiFi", "Kitchen", "Air Conditioning", "Smart TV", "Washer", "Mini Fridge"],
-    images: ["https://picsum.photos/seed/city2a/800/600", "https://picsum.photos/seed/city2b/800/600", "https://picsum.photos/seed/city2c/800/600"],
+    images: [
+      IMG("tokyo shibuya street japan", 101),
+      IMG("japanese apartment modern interior", 102),
+      IMG("tokyo apartment minimalist", 103),
+    ],
     hostIndex: 3,
   },
   {
@@ -244,7 +323,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "8 Rue des Archives", city: "Paris", country: "France",
     lat: 48.8590, lng: 2.3546, category: "City",
     amenities: ["WiFi", "Kitchen", "Air Conditioning", "Balcony", "Elevator"],
-    images: ["https://picsum.photos/seed/city3a/800/600", "https://picsum.photos/seed/city3b/800/600", "https://picsum.photos/seed/city3c/800/600", "https://picsum.photos/seed/city3d/800/600"],
+    images: [
+      IMG("paris apartment balcony marais", 111),
+      IMG("parisian flat interior classic", 112),
+      IMG("paris marais street france", 113),
+      IMG("french apartment classic paris", 114),
+    ],
     hostIndex: 0,
   },
   {
@@ -254,10 +338,17 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "22 Bedford Street", city: "London", country: "United Kingdom",
     lat: 51.5115, lng: -0.1234, category: "City",
     amenities: ["WiFi", "Kitchen", "Washer", "Dryer", "Smart TV", "Elevator"],
-    images: ["https://picsum.photos/seed/city4a/800/600", "https://picsum.photos/seed/city4b/800/600", "https://picsum.photos/seed/city4c/800/600"],
+    images: [
+      IMG("london covent garden street", 121),
+      IMG("london flat interior design", 122),
+      IMG("london building street facade", 123),
+    ],
     hostIndex: 7,
   },
-  // Countryside
+
+  // =========================================================================
+  // COUNTRYSIDE
+  // =========================================================================
   {
     title: "Tuscan Farmhouse Retreat",
     description: "Restored 18th-century farmhouse surrounded by olive groves and vineyards. Pool with panoramic hillside views. Cooking classes available.",
@@ -265,7 +356,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Via della Chiesa 12", city: "Florence", country: "Italy",
     lat: 43.6745, lng: 11.1953, category: "Countryside",
     amenities: ["WiFi", "Pool", "Kitchen", "Parking", "Garden", "Pet Friendly", "Cooking Class"],
-    images: ["https://picsum.photos/seed/country1a/800/600", "https://picsum.photos/seed/country1b/800/600", "https://picsum.photos/seed/country1c/800/600", "https://picsum.photos/seed/country1d/800/600"],
+    images: [
+      IMG("tuscany farmhouse italy countryside", 131),
+      IMG("italian villa countryside tuscany", 132),
+      IMG("tuscany landscape olive grove", 133),
+      IMG("italian garden villa pool", 134),
+    ],
     hostIndex: 6,
   },
   {
@@ -275,7 +371,11 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Kilmore Road", city: "Killarney", country: "Ireland",
     lat: 52.0586, lng: -9.5089, category: "Countryside",
     amenities: ["Fireplace", "Kitchen", "Garden", "Parking", "Pet Friendly"],
-    images: ["https://picsum.photos/seed/country2a/800/600", "https://picsum.photos/seed/country2b/800/600", "https://picsum.photos/seed/country2c/800/600"],
+    images: [
+      IMG("ireland countryside green hills", 141),
+      IMG("irish cottage stone thatched", 142),
+      IMG("ireland hills sheep landscape", 143),
+    ],
     hostIndex: 7,
   },
   {
@@ -285,10 +385,18 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Route de Gordes 55", city: "Aix-en-Provence", country: "France",
     lat: 43.7102, lng: 5.4446, category: "Countryside",
     amenities: ["WiFi", "Pool", "Kitchen", "Parking", "Garden", "Bikes Available"],
-    images: ["https://picsum.photos/seed/country3a/800/600", "https://picsum.photos/seed/country3b/800/600", "https://picsum.photos/seed/country3c/800/600", "https://picsum.photos/seed/country3d/800/600"],
+    images: [
+      IMG("lavender field provence france", 151),
+      IMG("french countryside stone house", 152),
+      IMG("provence stone house garden", 153),
+      IMG("french farmhouse garden provence", 154),
+    ],
     hostIndex: 6,
   },
-  // Modern
+
+  // =========================================================================
+  // MODERN
+  // =========================================================================
   {
     title: "Barcelona Minimalist Penthouse",
     description: "Sleek penthouse in Barcelona's Eixample district with a private rooftop pool. Designed by a local architect. Open-plan living with city views.",
@@ -296,7 +404,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Carrer de Pau Claris 120", city: "Barcelona", country: "Spain",
     lat: 41.3874, lng: 2.1686, category: "Modern",
     amenities: ["WiFi", "Pool", "Kitchen", "Air Conditioning", "Rooftop", "Elevator", "Smart Home"],
-    images: ["https://picsum.photos/seed/modern1a/800/600", "https://picsum.photos/seed/modern1b/800/600", "https://picsum.photos/seed/modern1c/800/600", "https://picsum.photos/seed/modern1d/800/600"],
+    images: [
+      IMG("barcelona modern penthouse rooftop", 161),
+      IMG("modern apartment rooftop terrace", 162),
+      IMG("rooftop pool city barcelona", 163),
+      IMG("modern interior design apartment", 164),
+    ],
     hostIndex: 2,
   },
   {
@@ -306,7 +419,11 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Dubai Marina Walk", city: "Dubai", country: "UAE",
     lat: 25.0806, lng: 55.1406, category: "Modern",
     amenities: ["WiFi", "Pool", "Kitchen", "Air Conditioning", "Gym", "Valet Parking", "Smart Home", "Concierge"],
-    images: ["https://picsum.photos/seed/modern2a/800/600", "https://picsum.photos/seed/modern2b/800/600", "https://picsum.photos/seed/modern2c/800/600"],
+    images: [
+      IMG("dubai marina skyline apartment", 171),
+      IMG("dubai glass apartment luxury", 172),
+      IMG("luxury apartment modern dubai", 173),
+    ],
     hostIndex: 6,
   },
   {
@@ -316,10 +433,18 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Warschauer Str. 58", city: "Berlin", country: "Germany",
     lat: 52.5104, lng: 13.4527, category: "Modern",
     amenities: ["WiFi", "Kitchen", "Washer", "Smart TV", "Vinyl Player"],
-    images: ["https://picsum.photos/seed/modern3a/800/600", "https://picsum.photos/seed/modern3b/800/600", "https://picsum.photos/seed/modern3c/800/600", "https://picsum.photos/seed/modern3d/800/600"],
+    images: [
+      IMG("berlin loft industrial design", 181),
+      IMG("industrial loft interior berlin", 182),
+      IMG("design loft minimal berlin", 183),
+      IMG("berlin apartment modern interior", 184),
+    ],
     hostIndex: 5,
   },
-  // Lake
+
+  // =========================================================================
+  // LAKE
+  // =========================================================================
   {
     title: "Lake Como Elegant Villa",
     description: "Historic villa on the shores of Lake Como with a private dock. Frescoed ceilings, marble bathrooms, and a terraced garden with lemon trees.",
@@ -327,7 +452,13 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Via Regina 40", city: "Bellagio", country: "Italy",
     lat: 45.9875, lng: 9.2612, category: "Lake",
     amenities: ["WiFi", "Pool", "Kitchen", "Parking", "Garden", "Boat Dock", "Maid Service"],
-    images: ["https://picsum.photos/seed/lake1a/800/600", "https://picsum.photos/seed/lake1b/800/600", "https://picsum.photos/seed/lake1c/800/600", "https://picsum.photos/seed/lake1d/800/600", "https://picsum.photos/seed/lake1e/800/600"],
+    images: [
+      IMG("lake como villa italy", 191),
+      IMG("italian villa garden lake como", 192),
+      IMG("lake villa luxury italian", 193),
+      IMG("italian garden pool villa lake", 194),
+      IMG("lake view villa italian", 195),
+    ],
     hostIndex: 2,
   },
   {
@@ -337,7 +468,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "780 Lakeshore Blvd", city: "South Lake Tahoe", country: "United States",
     lat: 38.9364, lng: -119.9856, category: "Lake",
     amenities: ["WiFi", "Kitchen", "Hot Tub", "Fireplace", "Kayaks", "Parking", "Washer", "Dryer"],
-    images: ["https://picsum.photos/seed/lake2a/800/600", "https://picsum.photos/seed/lake2b/800/600", "https://picsum.photos/seed/lake2c/800/600", "https://picsum.photos/seed/lake2d/800/600"],
+    images: [
+      IMG("lake tahoe cabin mountain lake", 201),
+      IMG("mountain lake cabin forest", 202),
+      IMG("lake cabin forest retreat", 203),
+      IMG("lake view mountain cabin", 204),
+    ],
     hostIndex: 4,
   },
   {
@@ -347,10 +483,17 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Quai du Mont-Blanc 5", city: "Geneva", country: "Switzerland",
     lat: 46.2083, lng: 6.1488, category: "Lake",
     amenities: ["WiFi", "Kitchen", "Lake View", "Balcony"],
-    images: ["https://picsum.photos/seed/lake3a/800/600", "https://picsum.photos/seed/lake3b/800/600", "https://picsum.photos/seed/lake3c/800/600"],
+    images: [
+      IMG("lake geneva swiss switzerland", 211),
+      IMG("swiss lake studio apartment", 212),
+      IMG("lake balcony view geneva", 213),
+    ],
     hostIndex: 1,
   },
-  // Cabin
+
+  // =========================================================================
+  // CABIN
+  // =========================================================================
   {
     title: "Redwood Forest Treehouse",
     description: "Handcrafted treehouse suspended among ancient redwoods. Rope bridge entrance, outdoor shower, and a skylight for stargazing from your bed.",
@@ -358,7 +501,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "3300 Redwood Way", city: "Muir Woods", country: "United States",
     lat: 37.8952, lng: -122.5793, category: "Cabin",
     amenities: ["Kitchen", "Outdoor Shower", "Fire Pit", "Hiking Access"],
-    images: ["https://picsum.photos/seed/cabin1a/800/600", "https://picsum.photos/seed/cabin1b/800/600", "https://picsum.photos/seed/cabin1c/800/600", "https://picsum.photos/seed/cabin1d/800/600"],
+    images: [
+      IMG("treehouse forest redwood cabin", 221),
+      IMG("cabin forest woods nature", 222),
+      IMG("treehouse cabin nature retreat", 223),
+      IMG("forest cabin retreat redwood", 224),
+    ],
     hostIndex: 4,
   },
   {
@@ -368,7 +516,11 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Järventie 15", city: "Rovaniemi", country: "Finland",
     lat: 66.5039, lng: 25.7294, category: "Cabin",
     amenities: ["WiFi", "Kitchen", "Sauna", "Fireplace", "Parking", "Lake Access"],
-    images: ["https://picsum.photos/seed/cabin2a/800/600", "https://picsum.photos/seed/cabin2b/800/600", "https://picsum.photos/seed/cabin2c/800/600"],
+    images: [
+      IMG("log cabin finland lapland", 231),
+      IMG("nordic cabin winter snow finland", 232),
+      IMG("cabin snow sauna finland", 233),
+    ],
     hostIndex: 7,
   },
   {
@@ -378,10 +530,18 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "42 Mountain View Dr", city: "Gatlinburg", country: "United States",
     lat: 35.7143, lng: -83.5102, category: "Cabin",
     amenities: ["WiFi", "Kitchen", "Hot Tub", "Fireplace", "Parking", "Pet Friendly", "Mountain View"],
-    images: ["https://picsum.photos/seed/cabin3a/800/600", "https://picsum.photos/seed/cabin3b/800/600", "https://picsum.photos/seed/cabin3c/800/600", "https://picsum.photos/seed/cabin3d/800/600"],
+    images: [
+      IMG("aframe cabin mountain smoky", 241),
+      IMG("smoky mountains cabin forest", 242),
+      IMG("mountain cabin modern aframe", 243),
+      IMG("cabin interior cozy mountain", 244),
+    ],
     hostIndex: 1,
   },
-  // Tropical
+
+  // =========================================================================
+  // TROPICAL
+  // =========================================================================
   {
     title: "Bali Jungle Villa",
     description: "Open-air villa in the Ubud jungle with a private infinity pool overlooking the rainforest. Outdoor bathroom, yoga deck, and a personal chef option.",
@@ -389,7 +549,12 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Jl. Raya Ubud", city: "Ubud", country: "Indonesia",
     lat: -8.5069, lng: 115.2625, category: "Tropical",
     amenities: ["WiFi", "Pool", "Kitchen", "Air Conditioning", "Garden", "Yoga Deck", "Breakfast Included"],
-    images: ["https://picsum.photos/seed/trop1a/800/600", "https://picsum.photos/seed/trop1b/800/600", "https://picsum.photos/seed/trop1c/800/600", "https://picsum.photos/seed/trop1d/800/600"],
+    images: [
+      IMG("bali villa jungle ubud", 251),
+      IMG("bali rice terrace tropical", 252),
+      IMG("tropical pool villa bali", 253),
+      IMG("bali interior villa design", 254),
+    ],
     hostIndex: 4,
   },
   {
@@ -399,7 +564,13 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "North Male Atoll", city: "Malé", country: "Maldives",
     lat: 4.1755, lng: 73.5093, category: "Tropical",
     amenities: ["WiFi", "Pool", "Air Conditioning", "Butler Service", "Snorkeling Gear", "Kayak", "Mini Bar"],
-    images: ["https://picsum.photos/seed/trop2a/800/600", "https://picsum.photos/seed/trop2b/800/600", "https://picsum.photos/seed/trop2c/800/600", "https://picsum.photos/seed/trop2d/800/600", "https://picsum.photos/seed/trop2e/800/600"],
+    images: [
+      IMG("maldives overwater bungalow ocean", 261),
+      IMG("overwater villa maldives tropical", 262),
+      IMG("maldives beach water paradise", 263),
+      IMG("tropical paradise beach maldives", 264),
+      IMG("overwater bungalow luxury maldives", 265),
+    ],
     hostIndex: 5,
   },
   {
@@ -409,10 +580,18 @@ const propertyTemplates: MockPropertyTemplate[] = [
     address: "Ruta 606", city: "Monteverde", country: "Costa Rica",
     lat: 10.3084, lng: -84.8162, category: "Tropical",
     amenities: ["WiFi", "Kitchen", "Garden", "Hiking Access", "Outdoor Shower", "Bird Watching"],
-    images: ["https://picsum.photos/seed/trop3a/800/600", "https://picsum.photos/seed/trop3b/800/600", "https://picsum.photos/seed/trop3c/800/600"],
+    images: [
+      IMG("costa rica rainforest jungle", 271),
+      IMG("jungle treehouse cabin tropical", 272),
+      IMG("rainforest lodge cabin tropical", 273),
+    ],
     hostIndex: 5,
   },
 ];
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
 
 /** Build the full mock property list with reviews attached. */
 export function getMockProperties(): PropertyWithDetails[] {
@@ -476,7 +655,6 @@ export function filterMockProperties(params: {
         (p) => p.category === params.category,
       );
     }
-    // Invalid category → show all (no crash)
   }
 
   if (params.city) {

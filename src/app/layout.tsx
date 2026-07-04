@@ -18,9 +18,9 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Travelio — Discover real places",
+  title: "Travelio — Discover your next getaway",
   description:
-    "Explore real destinations worldwide. Data from OpenStreetMap.",
+    "Browse unique vacation rentals. A demo portfolio project — all properties are fictitious.",
 };
 
 export default function RootLayout({
@@ -61,7 +61,7 @@ export default function RootLayout({
             <Footer />
             {/* Demo banner */}
             <div className="fixed bottom-3 left-3 z-50 rounded-full bg-primary/90 px-3 py-1 text-xs font-medium tracking-wide text-bg shadow-sm backdrop-blur-sm">
-              Demo — Datos reales de OpenStreetMap
+              Demo — Propiedades ficticias
             </div>
           </ThemeProvider>
         </body>

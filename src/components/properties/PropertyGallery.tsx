@@ -56,6 +56,7 @@ export default function PropertyGallery({
       {/* Main image */}
       <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-gray-light/30">
         <PropertyImage
+          key={images[currentIndex]}
           src={images[currentIndex]}
           alt={`${title} — Image ${currentIndex + 1}`}
           fill

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface PropertyImageProps {
   src: string;
@@ -28,6 +28,11 @@ export default function PropertyImage({
   fallbackIcon,
 }: PropertyImageProps) {
   const [errored, setErrored] = useState(false);
+
+  // Reset error state when the image source changes (e.g. carousel navigation)
+  useEffect(() => {
+    setErrored(false);
+  }, [src]);
 
   if (errored || !src) {
     return (
