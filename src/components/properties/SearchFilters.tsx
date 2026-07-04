@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useCallback } from "react";
 /**
- * Client Component: city text input, price range, and clear button.
+ * Client Component: city text input, category selector, and clear button.
  * All state is stored in URL searchParams for server-side filtering.
  */
 export default function SearchFilters() {
@@ -12,8 +12,6 @@ export default function SearchFilters() {
   const searchParams = useSearchParams();
 
   const city = searchParams.get("city") ?? "";
-  const minPrice = searchParams.get("minPrice") ?? "";
-  const maxPrice = searchParams.get("maxPrice") ?? "";
   const category = searchParams.get("category") ?? "";
 
   const updateParam = useCallback(
@@ -34,7 +32,7 @@ export default function SearchFilters() {
     router.push(pathname);
   }, [router, pathname]);
 
-  const hasActiveFilters = !!(city || minPrice || maxPrice || category);
+  const hasActiveFilters = !!(city || category);
 
   return (
     <div className="rounded-xl border border-gray-light bg-bg p-4 shadow-soft-sm">
@@ -60,47 +58,31 @@ export default function SearchFilters() {
           />
         </div>
 
-        {/* Price Range */}
+        {/* Category */}
         <div>
-          <label className="mb-1 block text-xs font-medium text-gray-soft">
-            Price per night
+          <label
+            htmlFor="filter-category"
+            className="mb-1 block text-xs font-medium text-gray-soft"
+          >
+            Category
           </label>
-          <div className="flex items-center gap-2">
-            <input
-              type="number"
-              value={minPrice}
-              onChange={(e) => updateParam("minPrice", e.target.value)}
-              placeholder="Min"
-              min={0}
-              autoComplete="transaction-amount"
- className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
-               aria-label="Minimum price"
-            />
-            <span className="text-gray-soft">—</span>
-            <input
-              type="number"
-              value={maxPrice}
-              onChange={(e) => updateParam("maxPrice", e.target.value)}
-              placeholder="Max"
-              min={0}
-              autoComplete="transaction-amount"
- className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
-               aria-label="Maximum price"
-            />
-          </div>
+          <select
+            id="filter-category"
+            value={category}
+            onChange={(e) => updateParam("category", e.target.value)}
+            className="w-full rounded-lg border border-gray-light bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-primary"
+          >
+            <option value="">All categories</option>
+            <option value="Beach">Beach</option>
+            <option value="Mountain">Mountain</option>
+            <option value="City">City</option>
+            <option value="Countryside">Countryside</option>
+            <option value="Modern">Modern</option>
+            <option value="Lake">Lake</option>
+            <option value="Cabin">Cabin</option>
+            <option value="Tropical">Tropical</option>
+          </select>
         </div>
-
-        {/* Category (read-only when inside /properties) */}
-        {category && (
-          <div>
-            <label className="mb-1 block text-xs font-medium text-gray-soft">
-              Category
-            </label>
-            <p className="rounded-lg bg-muted/30 px-3 py-2 text-sm text-text-primary">
-              {category}
-            </p>
-          </div>
-        )}
 
         {/* Clear filters */}
         {hasActiveFilters && (

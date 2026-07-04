@@ -12,6 +12,7 @@ interface PropertyGalleryProps {
 /**
  * Client Component: image carousel with thumbnail navigation.
  * Wrapped with next/dynamic + { ssr: false } in the parent page.
+ * Shows a building placeholder SVG when no images are available.
  */
 export default function PropertyGallery({
   images,
@@ -34,19 +35,23 @@ export default function PropertyGallery({
   if (images.length === 0) {
     return (
       <div className="flex aspect-[16/9] items-center justify-center rounded-xl bg-gray-light/50">
-        <svg
-          className="h-16 w-16 text-gray-soft/40"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
-          />
-        </svg>
+        <div className="flex flex-col items-center gap-2 text-gray-soft/50">
+          <svg
+            className="h-20 w-20"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={0.8}
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 21h19.5M4.5 21V9.75m15 11.25V9.75M2.25 9.75l9.75-6 9.75 6M6.75 21v-5.25a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-9 0h19.5"
+            />
+          </svg>
+          <span className="text-sm">No images available</span>
+        </div>
       </div>
     );
   }

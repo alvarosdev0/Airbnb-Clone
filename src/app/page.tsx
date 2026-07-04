@@ -20,7 +20,8 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     category ? { category } : undefined,
   );
 
-  const totalCount = (await getProperties()).length;
+  const allProperties = await getProperties();
+  const totalCount = allProperties.length;
 
   return (
     <div>
